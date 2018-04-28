@@ -1,0 +1,15 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "blog api project for thinkful lesson",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "author": "peter mcgrath",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
