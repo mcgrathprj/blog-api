@@ -10,6 +10,21 @@
   "author": "peter mcgrath",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
     "uuid": "^3.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcgrathprj/blog-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcgrathprj/blog-api/issues"
+  },
+  "homepage": "https://github.com/mcgrathprj/blog-api#readme",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
   }
 }
