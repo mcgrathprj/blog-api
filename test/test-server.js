@@ -47,8 +47,7 @@ describe('Blog Posts', function() {
         expect(res.body).to.be.a('object');
         expect(res.body).to.include.keys('id', 'title', 'content', 'author', 'publishDate');
         expect(res.body.id).to.not.equal(null);
-        expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
-      });
+       });
   });
 
   it('should update items on PUT', function() {
