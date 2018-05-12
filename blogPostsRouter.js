@@ -10,9 +10,30 @@ mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
 const {BlogPosts} = require('./models');
 
-router.get('/', (req, res) => {
+router.get('/posts', (req, res) => {
+  blog-api
+  .find();
+  .then(posts => {
   res.json(BlogPosts.get());
+  });
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  });
 });
+
+router.get('/posts/:id', (req, res) => {
+  blog-api
+  .findById(req.params.id);
+  .then(posts => {
+  res.json(BlogPosts.get());
+  });
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  });
+});
+
 
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['title','content','author'];
@@ -24,9 +45,23 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  const item = BlogPosts.create(req.body.title, req.body.content, req.body.author);
-  res.status(201).json(item);
+  // const item = BlogPosts.create(req.body.title, req.body.content, req.body.author);
+  // res.status(201).json(item);
+blog-api
+  .create({
+  title: req.body.title,
+  content: req.body.content,
+  author: req.body.author
+  });
+  .then(blog-api => res.status(201).json(blog-api.serialize()))
+  .catch(err=> {
+    console.log(err);
+    res.status(500).json({message: "Internal Server Error"})
+  });
 });
+
+
+
 
 router.delete('/:id', (req, res) => {
   BlogPosts.delete(req.params.id);
