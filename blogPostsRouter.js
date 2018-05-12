@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+mongoose.Promise = global.Promise;
+
+const { PORT, DATABASE_URL } = require('./config');
 const {BlogPosts} = require('./models');
-
-
-BlogPosts.create("Aggretsuko Is All Of Us And We Are All Aggretsuko","Some content about Aggretsuko", "Charles Pulliam-Moore", )
-BlogPosts.create("Roomful of Rich, White NYC Parents Get Big Mad at Plan to Diversify Neighborhood's Schools", "Yikes. Just yikes.", "Anne Branigin")
-BlogPosts.create("Tesla Driver Banned From Highway After Being Caught In the Passenger Seat", "Yikes again.", "Elizabeth Werth")
 
 router.get('/', (req, res) => {
   res.json(BlogPosts.get());
