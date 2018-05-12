@@ -61,12 +61,12 @@ blog-api
 });
 
 
+router.delete('posts/:id', (req, res) => {
+  blog-api
+    .findByIdAndRemove(req.params.id)
+    .then(blog-api => res.status(204).end())
+    .catch(err => res.status(500).json{message: "Internal Server Error"})
 
-
-router.delete('/:id', (req, res) => {
-  BlogPosts.delete(req.params.id);
-  console.log(`Deleted blog post \`${req.params.ID}\``);
-  res.status(204).end();
 });
 
 router.put('/:id', jsonParser, (req, res) => {
