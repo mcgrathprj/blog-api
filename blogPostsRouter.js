@@ -14,7 +14,7 @@ router.get('/posts', (req, res) => {
   blog-api
   .find();
   .then(posts => {
-  res.json(BlogPosts.get());
+  res.json(posts.map(post => post.serialize()));
   });
   .catch(err => {
     console.error(err);
@@ -25,9 +25,7 @@ router.get('/posts', (req, res) => {
 router.get('/posts/:id', (req, res) => {
   blog-api
   .findById(req.params.id);
-  .then(posts => {
-  res.json(BlogPosts.get());
-  });
+  .then(posts => res.json(post.serialize()));
   .catch(err => {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
@@ -35,7 +33,7 @@ router.get('/posts/:id', (req, res) => {
 });
 
 
-router.post('/', jsonParser, (req, res) => {
+router.post('/posts', jsonParser, (req, res) => {
   const requiredFields = ['title','content','author'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -45,8 +43,7 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  // const item = BlogPosts.create(req.body.title, req.body.content, req.body.author);
-  // res.status(201).json(item);
+  
 blog-api
   .create({
   title: req.body.title,
