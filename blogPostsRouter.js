@@ -86,14 +86,19 @@ router.put('/:id', jsonParser, (req, res) => {
     return res.status(400).send(message);
   }
   console.log(`Updating blog post \`${req.params.id}\``);
+  const toUpdate = {};
+  const updatableFields = ['title', 'content', 'author'];
 
-  BlogPosts.update({
-    id: req.params.id,
-    title: req.body.title,
-    content: req.body.content
+  updatableFields.forEach (field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
   });
 
-  res.status(204).end();
+  blog-api
+  .findByIdAndUpdate (req.params.id, {$set: toUpdate})
+  .then(blog-api => res.status(204).end())
+  .catch(err => res.status(500).json({message: 'Internal Server Error'}))
 });
 
 module.exports = router;
